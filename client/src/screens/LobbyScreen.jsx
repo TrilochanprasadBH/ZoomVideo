@@ -21,7 +21,7 @@ const LobbyScreen = () => {
         <label htmlFor='email'>Email</label>
         <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" id='email' />
         <br />
-        <label htmlFor='room'>Room Number</label>
+        <label htmlFor='room'>Room</label>
         <input value={room} onChange={(e)=>setRoom(e.target.value)} type="number" id='room' />
         <br />
         <button>Join Room</button>
