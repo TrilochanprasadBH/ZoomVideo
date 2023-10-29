@@ -1,13 +1,19 @@
 import  {useCallback, useState} from 'react'
+import { useSocket } from '../context/SocketProvider';
 
 const LobbyScreen = () => {
   const [email,setEmail]=useState("");
   const [room, setRoom]=useState(""); 
 
+    const socket = useSocket();
+    console.log(socket);
+
+
   const handleSubmit= useCallback((e)=>{
    e.preventDefault()
     console.log({email, room});
-  },[email, room]) 
+    socket.emit('room:join', {email, room});
+  },[email, room, socket]) 
  
   //if dependecny is not given useCallback will run only on initial render [] , and upon changing input email room also , 
   //console wont show updated values as dependency is empty 

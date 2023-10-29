@@ -6,10 +6,15 @@ import PropTypes from "prop-types"; // Import PropTypes
 const SocketContext = createContext(null);
 
 
-export const  useSocket = ()=> {
+
+
+export const useSocket= ()=>{
     const socket = useContext(SocketContext);
+    console.log(socket);
     return socket
 }
+
+
 
 
  export const SocketProvider=({children})=>{
@@ -23,6 +28,8 @@ export const  useSocket = ()=> {
         </SocketContext.Provider>
     )
 }
+
+
 
 
 SocketProvider.propTypes = {
