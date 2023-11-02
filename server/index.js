@@ -13,12 +13,18 @@ io.on("connection", (socket)=>{
     console.log("socket is connected, this is id",socket.id)
     //receiving from server 
     socket.on('room:join', (data)=>{
-        // console.log(data);
+        console.log(data);
         const {email, room}= data 
         emailToSocket.set(email, socket.id)
         SocketToEmail.set(socket.id, email)
-       io.to(socket.id).emit('room:join', data);
-       //sending room join event from backend 
+        
+        //when another  user joins same room we need to emit and notify existing user , for tht 
+        io.to(room).emit('user:joined', {email, id:socket.id})
+        socket.join(room); 
+      
+        //sending room join event from backend 
+        io.to(socket.id).emit('room:join', data); 
+       
     })
 })
 

@@ -1,5 +1,6 @@
 import  {useCallback, useState, useEffect} from 'react'
 import { useSocket } from '../context/SocketProvider';
+import { useNavigate } from 'react-router-dom'; 
 
 const LobbyScreen = () => {
   const [email,setEmail]=useState("");
@@ -7,7 +8,7 @@ const LobbyScreen = () => {
 
     const socket = useSocket();
     console.log(socket);
-
+  const navigate = useNavigate();
 
   const handleSubmit= useCallback((e)=>{
    e.preventDefault()
@@ -20,8 +21,10 @@ const LobbyScreen = () => {
   //console wont show updated values as dependency is empty 
   const handleJoinRooms= useCallback((data)=>{
    const {email, room } = data  
+   navigate(`/room/${room}`)
+   //as soon as email and room is entered and join button is pressed , we are re directed to room , with room number entered 
    console.log(email, room); 
-  },[])
+  },[navigate])
   
   
   useEffect(()=>{
